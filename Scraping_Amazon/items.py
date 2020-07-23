@@ -8,5 +8,8 @@ import scrapy
 
 class ScrapingamazonItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    product_name = scrapy.Field()
+    author = scrapy.Field()
+    price = scrapy.Field()
+    product_image_link = scrapy.Field()
     pass
