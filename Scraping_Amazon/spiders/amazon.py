@@ -12,7 +12,14 @@ class AmazonSpider(scrapy.Spider):
     def parse(self, response):
         items = ScrapingamazonItem()
 
-        product_name = response.css()
-        author = response.css()
-        price = response.css()
-        product_image_link = response.css()
+        product_name = response.css(".a-color-base.a-text-normal::text").extract()
+        author = response.css(".a-color-base .a-size-base+ .a-size-base::text").extract()
+        price = response.css(".a-spacing-top-small .a-price-whole , .a-spacing-top-small .a-price-fraction").css("::text").extract()
+        product_image_link = response.css(".s-image").xpath("@src").extract()
+
+        items['product_name'] = product_name
+        items['author'] = author
+        items['price'] = price
+        items['product_image_link'] = product_image_link
+
+        yield items
